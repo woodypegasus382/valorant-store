@@ -36,16 +36,11 @@ export const action: ActionFunction = async ({ request }) => {
     session.set('username', `${user.GameName}#${user.TagLine}`);
     session.set('region', region);
 
-    return json(
-      {
-        ok: true
-      },
-      {
-        headers: {
-          'Set-Cookie': await commitSession(session)
-        }
+    return redirect('/', {
+      headers: {
+        'Set-Cookie': await commitSession(session)
       }
-    );
+    });
   } catch (err) {
     return json({
       ok: false,
