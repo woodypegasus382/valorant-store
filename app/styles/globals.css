@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Valorant';
+  src: url('/ttf/ValorantFont.ttf');
+}
+
+html {
+  color-scheme: dark;
+}
