@@ -5,7 +5,7 @@ export default function LoginForm() {
   const transition = useTransition();
 
   return (
-    <div className="pt-20 min-h-screen">
+    <div className="min-h-screen pt-20">
       <h1 className="text-5xl text-center font-['Valorant']">Log In</h1>
 
       {actionData?.ok === false && (
@@ -16,22 +16,23 @@ export default function LoginForm() {
 
       <Form
         method="post"
-        className="flex p-8 mx-auto max-w-3xl flex-col w-full space-y-4"
+        action="/login"
+        className="flex flex-col w-full max-w-3xl p-8 mx-auto space-y-4"
       >
         <input
           type="text"
           name="username"
-          className="bg-gray-800 placeholder-gray-400 p-3 focus:bg-gray-800 rounded-md w-full"
+          className="w-full p-3 placeholder-gray-400 bg-gray-800 rounded-md focus:bg-gray-800"
           placeholder="Username"
         />
         <input
           name="password"
           type="password"
-          className="bg-gray-800 p-3 rounded-md w-full"
+          className="w-full p-3 bg-gray-800 rounded-md"
           placeholder="Password"
         />
 
-        <select className="p-3 rounded-md bg-gray-800" name="region">
+        <select className="p-3 bg-gray-800 rounded-md" name="region">
           <option value="na">North America</option>
           <option value="latam">Latam</option>
           <option value="br">Brazil</option>
