@@ -25,7 +25,12 @@ export const loader: LoaderFunction = async ({ request }) => {
     return redirect('/login');
 
   try {
-    const skins = await getSkins(subject, accessToken, rsoToken, region);
+    const skins = await getSkins({
+      accessToken,
+      rsoToken,
+      subject,
+      region
+    });
 
     return json({
       skins,

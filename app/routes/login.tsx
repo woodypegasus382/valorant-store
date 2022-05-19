@@ -25,10 +25,11 @@ export const action: ActionFunction = async ({ request }) => {
   const { username, password, region } = Object.fromEntries(formData.entries());
 
   try {
-    const { auth, user } = await login(
-      username.toString(),
-      password.toString()
-    );
+    const { auth, user } = await login({
+      username: username.toString(),
+      password: password.toString(),
+      region: region.toString()
+    });
 
     session.set('accessToken', auth.accessToken);
     session.set('rsoToken', auth.rsoToken);

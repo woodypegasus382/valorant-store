@@ -9,34 +9,38 @@ export interface Skin {
   id: string;
 }
 
-export const getSkins = async (
-  subject: string,
-  token: IAccessToken,
-  rsoToken: string,
-  region: string
-): Promise<Skin[]> => {
+const buildRegion = (region: string) => {
   const shard = ['latam', 'br'].includes(region) ? 'na' : region;
 
+  return new Region(
+    `https://pd.${shard}.a.pvp.net`,
+    `https://shared.${shard}.a.pvp.net`,
+    `https://glz-${region}-1.${shard}.a.pvp.net`,
+    region
+  );
+};
+
+export const getSkins = async (params: {
+  region: string;
+  accessToken: IAccessToken;
+  rsoToken: string;
+  subject: string;
+}): Promise<Skin[]> => {
   const client = new RiotApiClient({
-    region: new Region(
-      `https://pd.${shard}.a.pvp.net`,
-      `https://shared.${shard}.a.pvp.net`,
-      `https://glz-${region}-1.${shard}.a.pvp.net`,
-      region
-    ),
+    region: buildRegion(params.region),
     password: '',
     username: ''
   });
 
   client.auth = {
-    accessToken: token,
-    rsoToken
+    accessToken: params.accessToken,
+    rsoToken: params.rsoToken
   };
 
   client.buildServices();
 
   const [offers, content] = await Promise.all([
-    client.storeApi.getStorefront(subject, true, 'en-US'),
+    client.storeApi.getStorefront(params.subject, true, 'en-US'),
     client.contentApi.getWeaponSkinlevels('en-US')
   ]);
 
@@ -54,11 +58,15 @@ export const getSkins = async (
   });
 };
 
-export const login = async (username: string, password: string) => {
+export const login = async (payload: {
+  username: string;
+  password: string;
+  region: string;
+}) => {
   const client = new RiotApiClient({
-    region: Region.NA,
-    password,
-    username
+    region: buildRegion(payload.region),
+    password: payload.password,
+    username: payload.username
   });
 
   await client.login();
