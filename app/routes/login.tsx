@@ -4,6 +4,7 @@ import { json } from '@remix-run/node';
 import LoginForm from '~/components/LoginForm';
 import { login } from '~/models/valorant.server';
 import { commitSession, getSession } from '~/session.server';
+import { FaGithub } from 'react-icons/fa';
 
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get('Cookie'));
@@ -54,6 +55,20 @@ export default function Index() {
   return (
     <div className="min-h-screen overflow-hidden bg-[#101822] text-white">
       <LoginForm />
+
+      <div className="flex items-center justify-center p-8 text-white">
+        <a
+          href="https://github.com/Fedeya/valorant-store"
+          target="__blank"
+          rel="noreferrer noopener"
+          className="flex items-center space-x-2"
+        >
+          <span className="text-lg font-bold text-center text-slate-400">
+            View this repostory on GitHub
+          </span>
+          <FaGithub className="text-2xl text-slate-400" />
+        </a>
+      </div>
     </div>
   );
 }

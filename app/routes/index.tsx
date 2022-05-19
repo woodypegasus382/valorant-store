@@ -6,6 +6,7 @@ import Skin from '~/components/Skin';
 import type { Skin as ISkin } from '~/models/valorant.server';
 import { getSkins } from '~/models/valorant.server';
 import { destroySession, getSession } from '~/session.server';
+import { FaGithub } from 'react-icons/fa';
 
 type LoaderData = {
   skins: ISkin[];
@@ -61,20 +62,32 @@ export default function Index() {
   return (
     <div className="min-h-screen overflow-hidden bg-[#101822] text-white">
       <div className="relative flex flex-col items-center justify-center w-screen min-h-screen p-8 space-y-8">
-        <div className="static flex items-center space-x-4 md:absolute right-4 top-4">
-          <p className="text-lg text-right font-['Valorant']">
-            {data.username}
-          </p>
-
-          <Form method="post">
-            <button
-              name="action"
-              value="logout"
-              className="p-2 bg-[#ff4654] font-['Valorant'] rounded-md text-[#101822]"
+        <div className="flex items-center space-x-4">
+          <div className="static flex items-center space-x-4 md:absolute left-4 top-4">
+            <a
+              href="https://github.com/Fedeya/valorant-store"
+              target="__blank"
+              rel="noreferrer noopener"
             >
-              Logout
-            </button>
-          </Form>
+              <FaGithub className="text-2xl" />
+            </a>
+          </div>
+
+          <div className="static flex items-center space-x-4 md:absolute right-4 top-4">
+            <p className="text-lg text-right font-['Valorant']">
+              {data.username}
+            </p>
+
+            <Form method="post">
+              <button
+                name="action"
+                value="logout"
+                className="p-2 bg-[#ff4654] font-['Valorant'] rounded-md text-[#101822]"
+              >
+                Logout
+              </button>
+            </Form>
+          </div>
         </div>
 
         <h1 className="text-[#ff4654] font-['Valorant'] text-center text-5xl font-bold">

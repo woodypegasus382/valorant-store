@@ -5,8 +5,10 @@ export default function LoginForm() {
   const transition = useTransition();
 
   return (
-    <div className="min-h-screen pt-20">
-      <h1 className="text-5xl text-center font-['Valorant']">Log In</h1>
+    <div className="pt-20">
+      <h1 className="text-5xl text-center font-['Valorant'] text-slate-200">
+        Log In
+      </h1>
 
       {actionData?.ok === false && (
         <p className="text-center mt-8 text-lg text-[#ff4654]">
